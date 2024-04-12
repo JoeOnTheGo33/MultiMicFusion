@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.fft import fft
 
+NUM_BINS = 100
+
 def get_signal(filename):
     wav_file = wave.open(filename, 'r')
     signal = wav_file.readframes(-1)
@@ -35,7 +37,7 @@ def histogram_of_amplitudes(filename, title):
     plt.figure()
 
     # Plot the histogram
-    plt.hist(signal, bins=100)
+    plt.hist(signal, bins=NUM_BINS)
 
     # print highest and lowest amplitude of signal
     print(f'Highest amplitude: {max(signal)}, lowest amplitude: {min(signal)}')
@@ -59,7 +61,7 @@ def histogram_of_frequencies(filename, title):
     plt.figure()
 
     # Plot the histogram of the frequencies
-    plt.hist(freq, bins=100, weights=spectrum)
+    plt.hist(freq, bins=NUM_BINS, weights=spectrum)
 
     # Label the axes
     plt.xlabel('Frequency [Hz]')
@@ -89,7 +91,7 @@ def histogram_of_volume_db(filename, title):
     # Create a new figure
     plt.figure()
     # Plot the histogram of the volume in dB
-    plt.hist(volume_db, bins=10)
+    plt.hist(volume_db, bins=NUM_BINS)
     # Label the axes
     plt.xlabel('Volume [dB]')
     plt.ylabel('Count')
@@ -219,8 +221,8 @@ def compare_freq_hist(file_one, file_two):
 
     min_both, max_both = min_max_freq(freq_one, freq_two)
 
-    hist_1 = np.histogram(a=freq_one, bins=10, range=(min_both, max_both), weights=spectrum_one)
-    hist_2 = np.histogram(a=freq_two, bins=10, range=(min_both, max_both), weights=spectrum_two)
+    hist_1 = np.histogram(a=freq_one, bins=NUM_BINS, range=(min_both, max_both), weights=spectrum_one)
+    hist_2 = np.histogram(a=freq_two, bins=NUM_BINS, range=(min_both, max_both), weights=spectrum_two)
 
     hist_diff = sum(np.abs(hist_1[0] - hist_2[0]))
     # format hist_diff as scientific notation, with 3 decimal places
@@ -244,8 +246,8 @@ def compare_db_hist(file_one, file_two):
 def diff_histograms(hist_one, hist_two):
     min_both = min(min(hist_one), min(hist_two))
     max_both = max(max(hist_one), max(hist_two))
-    hist_1 = np.histogram(a=hist_one, bins=10, range=(min_both, max_both))
-    hist_2 = np.histogram(a=hist_two, bins=10, range=(min_both, max_both))
+    hist_1 = np.histogram(a=hist_one, bins=NUM_BINS, range=(min_both, max_both))
+    hist_2 = np.histogram(a=hist_two, bins=NUM_BINS, range=(min_both, max_both))
     hist_diff = sum(np.abs(hist_1[0] - hist_2[0]))
     return hist_diff
 
@@ -269,8 +271,8 @@ def moving_window_distance(file_one, file_two, window_duration_seconds=10):
 
         min_both, max_both = min_max_freq(freq_one, freq_two)
 
-        hist_1_freq = np.histogram(a=freq_one, bins=10, range=(min_both, max_both), weights=spectrum_one)
-        hist_2_freq = np.histogram(a=freq_two, bins=10, range=(min_both, max_both), weights=spectrum_two)
+        hist_1_freq = np.histogram(a=freq_one, bins=NUM_BINS, range=(min_both, max_both), weights=spectrum_one)
+        hist_2_freq = np.histogram(a=freq_two, bins=NUM_BINS, range=(min_both, max_both), weights=spectrum_two)
         distance_freq = sum(np.abs(hist_1_freq[0] - hist_2_freq[0]))
 
         # compute volume distance
