@@ -18,6 +18,6 @@ The main code is in [fusion/main.ipynb](fusion/main.ipynb).
 An implemeentation of moving average alone is in `fusion_moving_average`.
 
 ## Sensor Info
-Sensor 3 - Josiah's Laptop
-Sensor 2 - Alex's Phone
-Sensor 1 - Joseph's Phone
+- Sensor 3 - Josiah's Laptop
+- Sensor 2 - Alex's Phone
+- Sensor 1 - Joseph's Phone
