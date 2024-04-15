@@ -1,3 +1,6 @@
 *.wav
 *.aup3
 raw*/
+.direnv/
+.venv/
+__pycache__/
